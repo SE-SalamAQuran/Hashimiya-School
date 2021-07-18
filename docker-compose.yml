@@ -1,0 +1,16 @@
+version: '4'
+services: 
+    node:
+        restart: always
+        build: .
+        ports: 
+            80:5000
+    mongo:
+        image: mongo
+        ports: 
+            27017:27017
+db:
+    image: mongo
+environment: 
+    MONGO_URI=${mongodb+srv://SAQ-SE:Wantedforever2@hashimiyaschool.grlgz.mongodb.net/myFirstDatabase?retryWrites=true&w=majority}
+    JWT_SECRET=${https://jwt.io/#debugger-io?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.nacUbXgO9ujEIMTzJAClSPrW8KH3bTu9LEOw636jiiU}
