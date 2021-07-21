@@ -10,6 +10,7 @@ const morgan = require("morgan");
 const cron = require("node-cron");
 const request = require("request");
 
+//Importing Routers
 const studentRouter = require("./routes/student.routes");
 const teacherRouter = require("./routes/teacher.routes");
 const periodRouter = require("./routes/period.routes");
