@@ -22,6 +22,7 @@ module.exports = {
                     phone: req.body.phone,
                     email: req.body.email,
                     password: hash,
+
                     address: req.body.address,
                     subject: req.body.subject,
                     salary: req.body.salary,
@@ -57,7 +58,8 @@ module.exports = {
                                         _id: data["_id"],
                                         name: data["name"],
                                         email: data["email"],
-                                        isAdmin: data['is_admin']
+                                        isAdmin: data['is_admin'],
+                                        user_type: "teacher"
                                     };
                                     var token = jwt.sign({
                                         user: jwtData

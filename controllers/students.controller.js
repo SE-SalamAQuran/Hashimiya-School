@@ -26,6 +26,7 @@ module.exports = {
                     grade: req.body.grade,
                     section: req.body.section,
                     dateOfBirth: req.body.dateOfBirth,
+                    gpa: req.body.gpa,
                 });
 
                 await newStudent
@@ -58,6 +59,7 @@ module.exports = {
                                         _id: data["_id"],
                                         name: data["name"],
                                         email: data["email"],
+                                        user_type: "student"
                                     };
                                     var token = jwt.sign({
                                         user: jwtData

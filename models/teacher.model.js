@@ -18,6 +18,10 @@ const teacherSchema = new Schema({
       }
     },
   },
+  avatar: {
+    type: String,
+    default: ""
+  },
   password: {
     type: String,
     required: true,
@@ -30,6 +34,7 @@ const teacherSchema = new Schema({
   salary: {
     type: Number,
   },
+
   phone: {
     type: String,
     validate(value) {

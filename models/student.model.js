@@ -27,6 +27,9 @@ const studentSchema = new Schema({
     type: String,
     required: true,
   },
+  gpa: {
+    type: Number,
+  },
 
   grade: {
     type: Number,
@@ -52,6 +55,11 @@ const studentSchema = new Schema({
     type: [mongoose.Types.ObjectId],
     ref: "Period",
     default: []
+  },
+  avatar: {
+    type: String,
+
+    default: ""
   },
   enrolled: {
     type: Boolean,

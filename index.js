@@ -9,12 +9,16 @@ const cors = require("cors");
 const morgan = require("morgan");
 const cron = require("node-cron");
 const request = require("request");
-
+const path = require("path");
+const multer = require("multer");
+const dirname = require("path").dirname;
+const fs = require("fs");
 //Importing Routers
 const studentRouter = require("./routes/student.routes");
 const teacherRouter = require("./routes/teacher.routes");
 const periodRouter = require("./routes/period.routes");
 const alertRouter = require("./routes/alert.routes");
+const uploadRoutes = require("./middleware/upload.avatar");
 
 // DB connection
 mongoose.connect(uri, {
@@ -59,12 +63,22 @@ app.use('/students', studentRouter);
 app.use('/teachers', teacherRouter);
 app.use('/periods', periodRouter);
 app.use('/alerts', alertRouter);
+app.use(multer({ dest: "./uploads" }).single("omg"));
+
+app.use("/upload", uploadRoutes);
+app.use(express.static(path.join(__dirname, "./uploads")));
 
 cron.schedule("* * * * Sep * ", () => {
     request.patch("http://localhost:5000/students/grades");
     request.patch("http://localhost:5000/students/graduates");
     //Clean student records every September
 })
+app.get("/uploads/:bin", (req, res) => {
+    const bin = req.params.bin;
+    res.set("Content-type", "image/jpeg" || "image/png" || "image/jpg");
+    var file = "./uploads/" + bin;
+    return res.sendFile(file, { root: __dirname });
+});
 
 //Server connection
 app.listen(port, () => {
