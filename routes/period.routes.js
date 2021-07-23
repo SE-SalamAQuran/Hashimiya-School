@@ -9,7 +9,7 @@ router.get("/period/:id", periodsController.getPeriod);
 router.post("/add", periodsController.newPeriod);
 
 //PATCH requests
-router.patch("/update/:id", periodsController.updatePeriod);
+router.patch("/update/:id/:admin", periodsController.updatePeriod);
 
 //DELETE requests
 router.delete("/period/:id/:admin", periodsController.removePeriod);

@@ -8,7 +8,7 @@ router.get("/student/:id", studentController.getStudent);
 router.post("/login", studentController.studentLogin);
 router.post("/new", studentController.registerNewStudent);
 
-router.patch("/update/:id", studentController.updateStudent);
+router.patch("/update/:id/:admin", studentController.updateStudent);
 router.patch("/grades", studentController.updateGrades);
 router.patch("/graduates", studentController.graduateStudents);
 

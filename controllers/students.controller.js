@@ -1,4 +1,5 @@
 const Student = require("../models/student.model");
+const Teacher = require("../models/teacher.model");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv").config({});
@@ -124,28 +125,40 @@ module.exports = {
 
     },
 
-    updateStudent: async (req, res) => {
+    updateStudent: (req, res) => {
         const { parentsPhone, address, email, section } = req.body;
         const id = req.params.id;
-        // const admin = req.body.admin;
-        await Period.findOneAndUpdate({ _id: id }, {
-            parentsPhone: parentsPhone,
-            address: address,
-            email: email,
-            section: section
+        const admin = req.params.admin;
+        Teacher.find({ _id: admin }, (error, result) => {
+            if (error) {
+                res.status(400).send(error);
+            }
+            if (!result[0].is_admin) {
 
-        },
-            (err, updated) => {
-                if (err) {
-                    return res.status(400).send(err);
-                }
-                res.status(202).send(updated);
-            })
+                return res.status(401).send("Can't access this, it's an only-admin feature")
+            }
+            Student.findOneAndUpdate({ _id: id }, {
+                parentsPhone: parentsPhone,
+                address: address,
+                email: email,
+                section: section
+
+            },
+                (err, updated) => {
+                    if (err) {
+                        return res.status(400).send(err);
+                    }
+                    res.status(202).send(updated);
+                })
+
+        })
+
     },
 
     //Increase Grades for all students each year automatically
 
     updateGrades: async (req, res) => {
+
         await Student.updateMany({}, { $inc: { grade: +1 } }, (err, updated) => {
             if (err) {
                 res.status(500).json({

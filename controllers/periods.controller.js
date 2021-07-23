@@ -41,9 +41,9 @@ module.exports = {
     },
     getPeriod: async (req, res) => {
         const id = req.params.id;
-        await Period.find({ _id: id }).populate('teacher').exec(function (err, periods) {
+        await Period.find({ _id: id }).populate('teacher').exec(function (error, periods) {
             if (err) {
-                return res.status(404).send(err);
+                return res.status(404).send(error);
             }
             res.status(200).send(periods);
         })
@@ -78,13 +78,23 @@ module.exports = {
     updatePeriod: async (req, res) => {
         const { days, time, link } = req.body;
         const id = req.params.id;
-        // const admin = req.body.admin;
-        await Period.findOneAndUpdate({ _id: id }, { days: days, time: time, link: link }, (err, updated) => {
-            if (err) {
-                return res.status(400).send(err);
+        const admin = req.params.admin;
+        Teacher.find({ _id: admin }, (error, result) => {
+            if (error) {
+                res.status(400).send(error);
             }
-            res.status(202).send(updated);
+            if (!result[0].is_admin) {
+                return res.status(401).send("Can't access this, it's an only-admin feature")
+            }
+            Period.findOneAndUpdate({ _id: id }, { days: days, time: time, link: link }, (err, updated) => {
+                if (err) {
+                    return res.status(400).send(err);
+                }
+                res.status(202).send(updated);
+            })
         })
+
+
     }
 
 }
