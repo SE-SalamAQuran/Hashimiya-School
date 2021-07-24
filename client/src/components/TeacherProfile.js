@@ -132,7 +132,7 @@ export default function TeacherProfile() {
         <div>
             <AppBar />
 
-            <div style={{ marginTop: "5rem" }} className="container emp-profile">
+            <div style={{ marginTop: "7rem" }} className="container emp-profile">
                 <form method="post">
                     <div className="row">
                         <div className="col-md-4">

@@ -1,4 +1,5 @@
 const Teacher = require("../models/teacher.model");
+const Period = require("../models/period.model");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv").config({});
@@ -98,5 +99,14 @@ module.exports = {
                 res.status(200).send(teacher);
         })
     },
+    getPeriods: async (req, res) => {
+        const teacher = req.params.id;
+        await Period.find({ teacher: teacher }, (err, periods) => {
+            if (err) {
+                return res.status(404).send(err);
+            }
+            return res.status(200).send(periods);
+        })
+    }
 
 }

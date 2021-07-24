@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from 'react';
-import AppBar from './AppBar';
+import AdminBar from './AdminBar';
 import "./styles/Profile.module.css";
 import axios from "axios";
 import { Image } from "react-bootstrap";
@@ -130,9 +130,9 @@ export default function AdminProfile() {
     }
     return (
         <div>
-            <AppBar />
+            <AdminBar />
 
-            <div style={{ marginTop: "5rem" }} className="container emp-profile">
+            <div style={{ marginTop: "7rem" }} className="container emp-profile">
                 <form method="post">
                     <div className="row">
                         <div className="col-md-4">

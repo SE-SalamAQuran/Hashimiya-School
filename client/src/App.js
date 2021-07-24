@@ -7,6 +7,7 @@ import Login from "./components/Login";
 import StudentProfile from "./components/StudentProfile";
 import TeacherProfile from "./components/TeacherProfile";
 import AdminProfile from "./components/AdminProfile";
+import Students from "./components/Students";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/profile" component={StudentProfile} />
           <Route path="/tprofile" component={TeacherProfile} />
           <Route path="/aprofile" component={AdminProfile} />
+          <Route path="/students" component={Students} />
           <Route path="/404" component={NotFound} />
           <Redirect to="/404" />
 

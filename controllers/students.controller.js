@@ -1,5 +1,6 @@
 const Student = require("../models/student.model");
 const Teacher = require("../models/teacher.model");
+const Period = require("../models/period.model");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv").config({});
@@ -85,18 +86,18 @@ module.exports = {
             message: "Provide all Credentials"
         });
     },
-    getStudent: async (req, res) => {
+    getStudent: (req, res) => {
         const id = req.params.id;
         Student.find({
             _id: id
-        }, (err, student) => {
+        }).populate('periods').exec(function (err, student) {
             if (err) {
                 res.status(404).json({
                     Error: err,
                     Message: "Student not found",
                 })
-            } else
-                res.status(200).send(student);
+            }
+            res.status(200).send(student);
         })
     },
 
@@ -179,6 +180,36 @@ module.exports = {
                 }
                 res.status(200).send(result);
             })
+    },
+    addStudentToPeriod: async (req, res) => {
+        const period = req.params.period;
+        const student = req.params.student;
+        const admin = req.params.id;
+
+        await Teacher.find({ _id: admin }, (e, teacher) => {
+            //Check if the user that is adding the student is a teacher 
+            if (e) {
+                return res.status(400).send(e)
+            }
+            //Check if this teacher is the headmaster, i.e, admin
+            if (teacher[0].is_admin != true) {
+                return res.status(401).send("Unauthorized access!~");
+            }
+            //Checking if the period itself exists in the DB
+            Period.find({ _id: period }, (err, period) => {
+                if (err) {
+                    return res.status(400).send(err);
+                }
+                //Find the student and update his periods array
+                Student.findOneAndUpdate({ _id: student }, { $push: { periods: period } }, (error, result) => {
+                    if (error) {
+                        return res.status(400).send(error);
+                    }
+                    res.status(200).send(result);
+                })
+            })
+        })
+
     }
 
 }

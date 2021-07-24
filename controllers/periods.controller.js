@@ -42,7 +42,7 @@ module.exports = {
     getPeriod: async (req, res) => {
         const id = req.params.id;
         await Period.find({ _id: id }).populate('teacher').exec(function (error, periods) {
-            if (err) {
+            if (error) {
                 return res.status(404).send(error);
             }
             res.status(200).send(periods);
@@ -55,11 +55,14 @@ module.exports = {
         const admin_id = req.params.admin;
         //Check whether the user is a teacher or not
         await Teacher.find({
-            _id: id
+            _id: admin_id
         }, (err, teacher) => {
 
             //If found then check if admin
-            if (err || !teacher.is_admin) {
+            if (err) {
+                return res.status(400).send(err);
+            }
+            if (teacher.is_admin === false) {
                 return res.status(401).send("Unauthorized Access to admin feature");
             }
             //remove the period

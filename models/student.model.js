@@ -54,7 +54,8 @@ const studentSchema = new Schema({
   periods: {
     type: [mongoose.Types.ObjectId],
     ref: "Period",
-    default: []
+    default: [],
+    maxLength: 8
   },
   avatar: {
     type: String,

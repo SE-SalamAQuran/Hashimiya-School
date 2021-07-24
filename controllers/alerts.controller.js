@@ -1,4 +1,5 @@
 const Alert = require("../models/alert.model");
+const Teacher = require("../models/teacher.model");
 
 module.exports = {
     fetchAlerts: async (req, res) => {
@@ -55,4 +56,30 @@ module.exports = {
                 res.status(200).send(result);
             });
     },
+    deleteAlert: async (req, res) => {
+        const id = req.params.id;
+        const admin_id = req.params.admin;
+        //Check whether the user is a teacher or not
+        await Teacher.find({
+            _id: admin_id
+        }, (err, teacher) => {
+
+            //If found then check if admin
+            if (err) {
+                return res.status(400).send(err);
+            }
+            if (teacher.is_admin === false) {
+                return res.status(401).send("Unauthorized Access to admin feature");
+            }
+            //remove the alert
+            Alert.deleteOne({
+                _id: id
+            }, (error, result) => {
+                if (error) {
+                    res.status(400).send(error)
+                }
+                res.status(200).send(result);
+            })
+        })
+    }
 };

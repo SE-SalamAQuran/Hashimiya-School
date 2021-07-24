@@ -36,7 +36,7 @@ export default function AppBar() {
                     onClick={logOut}
                     style={{ marginRight: "7px" }}
                     type="button"
-                    class="btn btn-sm btn-outline-danger"
+                    className="btn btn-sm btn-outline-danger"
                     aria-label="logout"
                 >
                     <img
@@ -98,12 +98,13 @@ export default function AppBar() {
         <div>
             <Navbar collapseOnSelect fixed="top" expand="lg" bg="light" variant="light">
                 <Container>
-                    <Navbar.Brand href="/">Al-Hashimiya School</Navbar.Brand>
+                    <Navbar.Brand href="/">
+                        <img src="https://img.icons8.com/clouds/60/ffffff/school.png" alt="school-icon" />
+                        Al-Hashimiya School</Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
                             <Nav.Link href="/teachers">Teachres</Nav.Link>
-                            <Nav.Link href="/students">Students</Nav.Link>
                             <NavDropdown title="More" id="collasible-nav-dropdown">
                                 <NavDropdown.Item href="/admissions">Admissions</NavDropdown.Item>
                                 <NavDropdown.Item href="/about">About Us</NavDropdown.Item>

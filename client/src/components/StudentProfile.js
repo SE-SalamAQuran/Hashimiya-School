@@ -6,9 +6,10 @@ import { Image } from "react-bootstrap";
 
 export default function StudentProfile() {
     const [name, setName] = useState("");
+    const [gpa, setGPA] = useState(0.0);
     const [email, setEmail] = useState("");
     const [address, setAddress] = useState("");
-    const [gpa, setGPA] = useState(0.0);
+
     const [grade, setGrade] = useState("");
     const [section, setSection] = useState("");
     const [dob, setDOB] = useState("");
@@ -173,7 +174,7 @@ export default function StudentProfile() {
         <div>
             <AppBar />
 
-            <div style={{ marginTop: "5rem" }} className="container emp-profile">
+            <div style={{ marginTop: "7rem" }} className="container emp-profile">
                 <form method="post">
                     <div className="row">
                         <div className="col-md-4">
