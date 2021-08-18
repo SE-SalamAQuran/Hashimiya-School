@@ -20,7 +20,7 @@ const alertSchema = new Schema({
     },
     parentsCalled: {
         type: Boolean,
-        default: false
+
     }
 
 }, { timestamps: true });

@@ -3,10 +3,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import axios from "axios";
 
 export default function StudentDetails(props) {
-    function handleDetailsClick() {
-        window.localStorage.setItem("id", props.name);
 
-    }
     const [email, setEmail] = useState("");
     const [address, setAddress] = useState("");
     const [parentsPhone, setParentsPhone] = useState("");
@@ -15,6 +12,7 @@ export default function StudentDetails(props) {
     const [dob, setDOB] = useState("");
 
     const student = localStorage.getItem("id");
+    console.log(student);
     useEffect(() => {
         axios.get("http://localhost:5000/students/student/" + student, {
             headers: {

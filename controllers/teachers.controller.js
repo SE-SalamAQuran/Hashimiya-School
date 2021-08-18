@@ -6,7 +6,7 @@ const dotenv = require("dotenv").config({});
 const secretKey = process.env.JWT_SECRET;
 module.exports = {
     getAllTeachers: async (req, res) => {
-        Teacher.find({}, (err, teachers) => {
+        Teacher.find({ is_admin: false }, (err, teachers) => {
             if (err) {
                 res.status(404).send(err);
             }

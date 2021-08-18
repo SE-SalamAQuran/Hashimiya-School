@@ -11,11 +11,11 @@ export default function CanvasMenu(props) {
         <div>
 
 
-            <Button variant={props.variant} onClick={handleShow}>
+            <Button variant={props.variant} className="btn btn-md" onClick={handleShow}>
                 {props.button}
             </Button>
 
-            <Offcanvas placement={props.placement} show={show} onHide={handleClose}>
+            <Offcanvas scroll={props.scroll} backdrop={props.backdrop} placement={props.placement} show={show} onHide={handleClose}>
                 <Offcanvas.Header closeButton>
                     <Offcanvas.Title>{props.title}</Offcanvas.Title>
                 </Offcanvas.Header>

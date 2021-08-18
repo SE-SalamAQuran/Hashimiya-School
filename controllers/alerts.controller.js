@@ -22,12 +22,13 @@ module.exports = {
         });
     },
     newAlert: async (req, res) => {
-        const { title, alertClass, student, cause } = req.body;
+        const { title, alertClass, student, cause, parentsCalled } = req.body;
         const newAlert = new Alert({
             title: title,
             alertClass: alertClass,
             student: student,
             cause: cause,
+            parentsCalled: parentsCalled
         });
 
         await newAlert

@@ -28,7 +28,7 @@ export default function AdminBar() {
     }
     return (
         <div>
-            <Navbar bg="dark" fixed="top" variant="dark">
+            <Navbar collapseOnSelect expand="lg" bg="dark" fixed="top" variant="dark">
                 <Container>
                     <Navbar.Brand href="/">
                         <img src="https://img.icons8.com/clouds/60/ffffff/school.png" alt="school-icon" />
@@ -39,13 +39,14 @@ export default function AdminBar() {
                         <Nav.Link href="/students">Students</Nav.Link>
                         <Nav.Link href="/teachers">Teachers</Nav.Link>
                     </Nav>
-                    <CanvasMenu variant="outline-danger" button="Show Alerts" title="Student Alerts" body={<AllStudentsAlerts />} placement="end" />
                 </Container>
+                <CanvasMenu variant="outline-danger" button="Show Alerts" title="Student Alerts" body={<AllStudentsAlerts />} placement="end" />
+
                 <button
                     onClick={logOut}
-                    style={{ marginRight: "7px" }}
+                    style={{ marginRight: "7px", marginLeft: "10px" }}
                     type="button"
-                    class="btn btn-sm btn-outline-danger"
+                    className="btn btn-sm btn-outline-danger"
                     aria-label="logout"
                 >
                     <img

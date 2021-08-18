@@ -19,6 +19,7 @@ const teacherRouter = require("./routes/teacher.routes");
 const periodRouter = require("./routes/period.routes");
 const alertRouter = require("./routes/alert.routes");
 const uploadRoutes = require("./middleware/upload.avatar");
+const studentController = require("./controllers/students.controller");
 
 // DB connection
 mongoose.connect(uri, {
@@ -69,8 +70,8 @@ app.use("/upload", uploadRoutes);
 app.use(express.static(path.join(__dirname, "./uploads")));
 
 cron.schedule("* * * * Sep * ", () => {
-    request.patch("http://localhost:5000/students/grades");
-    request.patch("http://localhost:5000/students/graduates");
+    studentController.graduateStudents;
+    studentController.updateGrades;
     //Clean student records every September
 })
 app.get("/uploads/:bin", (req, res) => {

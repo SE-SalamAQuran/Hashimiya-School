@@ -1,6 +1,5 @@
 import React from 'react';
 import { Card } from "react-bootstrap";
-import CanvasMenu from "./CanvasMenu";
 
 export default function UserCard(props) {
 
@@ -13,7 +12,6 @@ export default function UserCard(props) {
                     <Card.Text>
                         {props.body}
                     </Card.Text>
-                    <CanvasMenu variant="outline-info" button="Show Details" title="Student Details" body={props.details} placement="end" />
                 </Card.Body>
             </Card>
         </div>
